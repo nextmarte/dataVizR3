@@ -16,6 +16,16 @@ language:
 
 [CLIQUE AQUI PARA BAIXAR O GIT BASH](https://git-scm.com/downloads)
 
+No git bash, execute os seguintes comandos:
+
+```bash
+
+git config --global user.name "Seu Nome"
+
+git config --global user.email "
+
+```
+
 [CLIQUE AQUI PARA CRIAR UMA CONTA NO GITHUB](https://github.com)
 
 </details>
