@@ -20,7 +20,7 @@ editor: visual
 
 #  {background-color="black"}
 
-![](images/Likert_R/5.png)
+![](images/Likert_R/5.png) 
 
 #  {background-color="black"}
 
