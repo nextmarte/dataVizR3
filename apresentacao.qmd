@@ -1,10 +1,110 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>title</title>
-</head>
-<body>
-    
-</body>
-</html>
+---
+title: Git e GitHub básico
+author:
+  - name: Marcus Ramalho & Ariel Levy
+format:
+  revealjs:
+      incremental: true
+      transition: slide
+      background-transition: fade
+      theme: night
+date: today
+footer: Universidade Federal Fluminense - Programa de formação de executivos - Ciência de dados
+incremental: true
+css: styles.css
+---
+
+## Controle de versão centralizado
+
+<center>
+
+![fonte: LaNts and Laminins](images/paste-3.png){width="696"}
+
+</center>
+
+## Controle de versão distribuído {{< fa solid code-compare >}}
+
+::: {layout-ncol="2"}
+![](images/paste-2.png){width="748"}
+:::
+
+-   Controle de versão ao longo do tempo
+-   Desenvolvido por Linus Torvalds em 2005
+-   Funciona em qualquer sistema operacional que suporte Git
+-   Repositórios locais e remotos
+-   Ramificação e mesclagem
+
+## Branching {{< fa solid code-branch >}}
+
+![](images/paste-1.png)
+
+## Alguns conceitos básicos
+
+-   Cada branch é uma linha de desenvolvimento independente {{< fa solid code-branch >}}
+-   Cada commit é uma alteração {{< fa solid code-commit >}}
+-   Cada fetch é uma busca {{< fa solid magnifying-glass >}}
+-   Cada pull é uma atualização {{< fa solid code-pull-request >}}
+-   Cada push é um envio {{< fa solid cloud-arrow-up >}}
+-   Cada merge é uma junção de branches {{< fa solid code-merge >}}
+-   Cada pull request é uma solicitação de alteração {{< fa solid code-pull-request >}}
+-   Cada fork é uma cópia de terceiros {{< fa solid code-fork >}}
+-   Cada clone é uma cópia local {{< fa solid clone >}}
+
+## Commit {{< fa solid code-commit >}}
+
+![](images/paste-4.png){fig-align="center"}
+
+## Branch merge {{< fa solid code-branch >}}
+
+![](images/paste-5.png){fig-align="center"}
+
+## Ciclo de versionamento de uma branch
+
+![](images/paste-6.png){fig-align="center"}
+
+## repositório remoto{{< fa solid code-merge >}}
+
+`git remote add origin URL_DO_REPOSITÓRIO`
+
+`git pull`
+
+```git
+/**
+ * Este código busca as últimas alterações do repositório
+  remoto (origin) e as mescla na branch local (origin/master).
+ */
+git fetch origin 
+git merge origin/master
+
+```
+
+`git push`
+
+```git
+/**
+ * Este código envia as alterações da branch local (origin/master)
+  para o repositório remoto (origin).
+ */
+git push origin origin/master
+```
+
+## GitHub {{< fa brands github >}}
+
+-   Plataforma de hospedagem de código-fonte {{< fa solid code >}}
+-   Controle de versão usando {{< fa brands git >}}
+-   Gerenciamento de projetos {{< fa solid tasks >}}
+-   Colaboração open source {{< fa solid users >}}
+-   Documentação {{< fa solid book >}}
+-   Aprendizado {{< fa solid graduation-cap >}}
+  
+
+## Referencias
+
+[Git](https://git-scm.com/)
+
+[QaOps Explicando git | estrutura de árvore - Rafael Lima](https://pt.slideshare.net/slideshow/qaops-235433972/235433972)
+
+[GitHub](https://github.com/)
+
+<a href="/" class="btn btn-primary">Home</a>
+

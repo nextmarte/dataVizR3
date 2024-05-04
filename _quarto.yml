@@ -1,19 +1,30 @@
 project:
   type: website
+  output-dir: docs
 
 website:
-  title: "dataVisR3"
+  title: "dataVizR3"
+  
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+        icon: house
+      - href: apresentacao.qmd
+        icon: file-slides
+        text: apresentação
+    right:
+      - href: https://github.com/nextmarte/dataVizR3
+        icon: github
+        text: GitHub
 
 format:
   html:
-    theme: cosmo
-    css: styles.css
-    toc: true
+    theme:
+      light: flatly
+      dark: darkly
+
+css: styles.css
 
 
 

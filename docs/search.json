@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Universidade Federal Fluminense  Programa de formação de executivos  Ciência de dados",
+    "section": "",
+    "text": "Aula 3 - Visualização de dados likert e deploy de um projeto QUARTO\n\n\nPreparando o ambiente - CLIQUE!\n\nCLIQUE AQUI PARA BAIXAR O GIT BASH\nCLIQUE AQUI PARA CRIAR UMA CONTA NO GITHUB\n\n\nObjetivo\n\nAprender a criar gráficos para visualização de dados do tipo likert\nAprender GIT Básico\nAprender a fazer deploy de um projeto QUARTO no GitHub pages\n\n\n\n\nConteúdo:\n\nVisualização de dados do tipo likert - Ariel Levy\nGIT Básico - Marcus Ramalho\nDeploy de um projeto QUARTO no GitHub pages - Marcus Ramalho\n\n\n\nLink para os repositórios das aulas anteriores:\nAula 1 Aula 2"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "apresentacao.html#controle-de-versão-centralizado",
+    "href": "apresentacao.html#controle-de-versão-centralizado",
+    "title": "Git e GitHub básico",
+    "section": "Controle de versão centralizado",
+    "text": "Controle de versão centralizado\n\n\n\n\nfonte: LaNts and Laminins"
+  },
+  {
+    "objectID": "apresentacao.html#controle-de-versão-distribuído",
+    "href": "apresentacao.html#controle-de-versão-distribuído",
+    "title": "Git e GitHub básico",
+    "section": "Controle de versão distribuído ",
+    "text": "Controle de versão distribuído \n\n\n\n\n\n\n\n\nControle de versão ao longo do tempo\nDesenvolvido por Linus Torvalds em 2005\nFunciona em qualquer sistema operacional que suporte Git\nRepositórios locais e remotos\nRamificação e mesclagem"
+  },
+  {
+    "objectID": "apresentacao.html#branching",
+    "href": "apresentacao.html#branching",
+    "title": "Git e GitHub básico",
+    "section": "Branching ",
+    "text": "Branching"
+  },
+  {
+    "objectID": "apresentacao.html#alguns-conceitos-básicos",
+    "href": "apresentacao.html#alguns-conceitos-básicos",
+    "title": "Git e GitHub básico",
+    "section": "Alguns conceitos básicos",
+    "text": "Alguns conceitos básicos\n\nCada branch é uma linha de desenvolvimento independente \nCada commit é uma alteração \nCada fetch é uma busca \nCada pull é uma atualização \nCada push é um envio \nCada merge é uma junção de branches \nCada pull request é uma solicitação de alteração \nCada fork é uma cópia de terceiros \nCada clone é uma cópia local"
+  },
+  {
+    "objectID": "apresentacao.html#commit",
+    "href": "apresentacao.html#commit",
+    "title": "Git e GitHub básico",
+    "section": "Commit ",
+    "text": "Commit"
+  },
+  {
+    "objectID": "apresentacao.html#branch-merge",
+    "href": "apresentacao.html#branch-merge",
+    "title": "Git e GitHub básico",
+    "section": "Branch merge ",
+    "text": "Branch merge"
+  },
+  {
+    "objectID": "apresentacao.html#ciclo-de-versionamento-de-uma-branch",
+    "href": "apresentacao.html#ciclo-de-versionamento-de-uma-branch",
+    "title": "Git e GitHub básico",
+    "section": "Ciclo de versionamento de uma branch",
+    "text": "Ciclo de versionamento de uma branch"
+  },
+  {
+    "objectID": "apresentacao.html#repositório-remoto",
+    "href": "apresentacao.html#repositório-remoto",
+    "title": "Git e GitHub básico",
+    "section": "repositório remoto",
+    "text": "repositório remoto\ngit remote add origin URL_DO_REPOSITÓRIO\ngit pull\n/**\n * Este código busca as últimas alterações do repositório\n  remoto (origin) e as mescla na branch local (origin/master).\n */\ngit fetch origin \ngit merge origin/master\ngit push\n/**\n * Este código envia as alterações da branch local (origin/master)\n  para o repositório remoto (origin).\n */\ngit push origin origin/master"
+  },
+  {
+    "objectID": "apresentacao.html#github",
+    "href": "apresentacao.html#github",
+    "title": "Git e GitHub básico",
+    "section": "GitHub ",
+    "text": "GitHub \n\nPlataforma de hospedagem de código-fonte \nControle de versão usando \nGerenciamento de projetos \nColaboração open source \nDocumentação \nAprendizado"
+  },
+  {
+    "objectID": "apresentacao.html#referencias",
+    "href": "apresentacao.html#referencias",
+    "title": "Git e GitHub básico",
+    "section": "Referencias",
+    "text": "Referencias\nGit\nQaOps Explicando git | estrutura de árvore - Rafael Lima\nGitHub\nHome\n\n\n\nUniversidade Federal Fluminense - Programa de formação de executivos - Ciência de dados"
+  }
+]

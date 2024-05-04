@@ -1,19 +1,41 @@
 ---
-title: Conhecendo melhor o QUARTO
-author:
-  - name: Marcus Ramalho & Ariel Levy
-format:
-  revealjs:
-      incremental: true
-      transition: slide
-      background-transition: fade
-      theme: night
-css: styles.css
-date: today
-footer: Universidade Federal Fluminense - Programa de formação de executivos - Ciência de dados
-incremental: true
+title: Universidade Federal Fluminense <br> Programa de formação de executivos <br> Ciência de dados
+lang: pt-br
+subtitle: "Disciplina: Visualização de dados"
+author: "Marcus Ramalho e Ariel Levy"
+language: 
+  title-block-author-single: "Professores: "
 ---
 
-# title
 
-content
+# Aula 3 - Visualização de dados likert e deploy de um projeto QUARTO
+
+<details>
+
+<summary>**Preparando o ambiente - CLIQUE!** </summary>
+
+[CLIQUE AQUI PARA BAIXAR O GIT BASH](https://git-scm.com/downloads)
+
+[CLIQUE AQUI PARA CRIAR UMA CONTA NO GITHUB](https://github.com)
+
+</details>
+
+### Objetivo
+
+1.  Aprender a criar gráficos para visualização de dados do tipo likert
+2.  Aprender GIT Básico
+3.  Aprender a fazer deploy de um projeto QUARTO no GitHub pages
+
+
+
+# Conteúdo:
+
+1.  Visualização de dados do tipo likert - Ariel Levy
+
+2.  GIT Básico - Marcus Ramalho
+
+3.  Deploy de um projeto QUARTO no GitHub pages - Marcus Ramalho
+
+# Link para os repositórios das aulas anteriores:
+
+[Aula 1](https://github.com/nextmarte/dataVizR) [Aula 2](https://github.com/nextmarte/dataVizR2)
