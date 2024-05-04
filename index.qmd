@@ -1,7 +1,19 @@
 ---
-title: "."
+title: Conhecendo melhor o QUARTO
+author:
+  - name: Marcus Ramalho & Ariel Levy
+format:
+  revealjs:
+      incremental: true
+      transition: slide
+      background-transition: fade
+      theme: night
+css: styles.css
+date: today
+footer: Universidade Federal Fluminense - Programa de formação de executivos - Ciência de dados
+incremental: true
 ---
 
-This is a Quarto website.
+# title
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+content
