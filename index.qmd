@@ -44,9 +44,7 @@ git config --global user.email "Se_email"
 
 3.  Deploy de um projeto QUARTO no GitHub pages - Marcus Ramalho
 
-# Link para os repositórios das aulas anteriores:
 
-[Aula 1](https://github.com/nextmarte/dataVizR) [Aula 2](https://github.com/nextmarte/dataVizR2)
 
 # Tarefas 1
 
@@ -81,3 +79,9 @@ Crie e faça deploy de um projeto QUARTO no GitHub pages usando o dashboard que 
 [ícones flaticon](https://www.flaticon.com/)
 
 [Extensões QUARTO]([httpsquartoknows.com/extensions](https://quarto.org/docs/extensions/listing-filters.html))
+
+# Link para os repositórios das aulas anteriores:
+
+[Aula 1](https://github.com/nextmarte/dataVizR) 
+
+[Aula 2](https://github.com/nextmarte/dataVizR2)
