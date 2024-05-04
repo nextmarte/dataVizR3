@@ -58,7 +58,7 @@ Contribuir com o repositório [dataVizR3]
 
 # Tarefas 2
 
-Crie e faça deploy de um projeto QUARTO no GitHub pages usando o dashboard que você criou na aula 2 e qualquer outro material que você queira adicionar ou tenha criado durante o curso. Adicione o link do seu projeto no arquivo README.md do repositório [dataVizR3] através de um pull request.
+Crie e faça deploy de um projeto QUARTO no GitHub pages usando o dashboard que você criou na aula 2 e qualquer outro material que você queira adicionar ou tenha criado durante o curso. Adicione o link do seu projeto no campo atividades do arquivo README.md do repositório [dataVizR3] através de um pull request.
 
 # Recursos adicionais
 
