@@ -74,7 +74,7 @@ css: styles.css
   remoto (origin) e as mescla na branch local (origin/master).
  */
 git fetch origin 
-git merge origin/master
+git merge origin/main
 
 ```
 
@@ -82,10 +82,10 @@ git merge origin/master
 
 ```git
 /**
- * Este código envia as alterações da branch local (origin/master)
+ * Este código envia as alterações da branch local (origin/main)
   para o repositório remoto (origin).
  */
-git push origin origin/master
+git push origin origin/main
 ```
 
 ## GitHub {{< fa brands github >}}
