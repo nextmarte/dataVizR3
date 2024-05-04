@@ -13,6 +13,9 @@ website:
       - href: apresentacao.qmd
         icon: file-slides
         text: apresentação
+      - href: Likert5.qmd
+        icon: file-text
+        text: Pesquisa Likert
     right:
       - href: https://github.com/nextmarte/dataVizR3
         icon: github

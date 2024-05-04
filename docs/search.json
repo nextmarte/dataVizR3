@@ -7,6 +7,181 @@
     "text": "Aula 3 - Visualização de dados likert e deploy de um projeto QUARTO\n\n\nPreparando o ambiente - CLIQUE!\n\nCLIQUE AQUI PARA BAIXAR O GIT BASH\nNo git bash, execute os seguintes comandos:\n\ngit config --global user.name \"Seu_Nome\"\n\ngit config --global user.email \"Se_email\"\nCLIQUE AQUI PARA CRIAR UMA CONTA NO GITHUB\n\n\nObjetivo\n\nAprender a criar gráficos para visualização de dados do tipo likert\nAprender GIT Básico\nAprender a fazer deploy de um projeto QUARTO no GitHub pages\n\n\n\n\nConteúdo:\n\nVisualização de dados do tipo likert - Ariel Levy\nGIT Básico - Marcus Ramalho\nDeploy de um projeto QUARTO no GitHub pages - Marcus Ramalho\n\n\n\nLink para os repositórios das aulas anteriores:\nAula 1 Aula 2\n\n\nTarefas 1\nContribuir com o repositório [dataVizR3] 1. Criar um fork do repositório dataVizR3\n\nClone o seu fork para o seu computador git clone endereco_do_seu_fork\nAdicione o repositorio original como upstream (git remote add upstream https://github.com/nextmarte/dataVizR3) - use git pull upstream main para atualizar o seu fork com as mudanças do repositório original.\nCrie uma branch com seu nome completo ex: git checkout -b seu_nome_completo\nNavegue até a pasta tarefas, crie umas pasta com seu nome e coloque o arquivo do dashboard que você criou na aula 2 (caso não tenha feito, crie um arquivo .md com seu nome completo) e faça um git add. e git commit com a mensagem “Adicionando dashboard de [seu nome]”\nFaça um commit com a mensagem “Adicionando dashboard de [seu nome]”\nFaça um push da sua branch(seu_nome_completo) para o seu fork (git push origin seu_nome_completo)\nFaça um pull request da sua branch para a branch main do repositório original usando a interface do GitHub.\n\n\n\nTarefas 2\nCrie e faça deploy de um projeto QUARTO no GitHub pages usando o dashboard que você criou na aula 2 e qualquer outro material que você queira adicionar ou tenha criado durante o curso. Adicione o link do seu projeto no campo atividades do arquivo README.md do repositório [dataVizR3] através de um pull request.\n\n\nRecursos adicionais\nícones bootstrap\nícones fontawesome\nícones material design\nícones flaticon\nExtensões QUARTO"
   },
   {
+    "objectID": "Likert5.html#código",
+    "href": "Likert5.html#código",
+    "title": "dataVizR3",
+    "section": "código",
+    "text": "código"
+  },
+  {
+    "objectID": "Likert5.html#setup",
+    "href": "Likert5.html#setup",
+    "title": "dataVizR3",
+    "section": "setup",
+    "text": "setup\n\n\nif(!require(pacman)){install.packages(\"pacman\")}\npacman::p_load(tidyverse,scales, likert,gt)"
+  },
+  {
+    "objectID": "Likert5.html#o-pacote-likert",
+    "href": "Likert5.html#o-pacote-likert",
+    "title": "dataVizR3",
+    "section": "o pacote likert",
+    "text": "o pacote likert"
+  },
+  {
+    "objectID": "Likert5.html#os-dados",
+    "href": "Likert5.html#os-dados",
+    "title": "dataVizR3",
+    "section": "os dados",
+    "text": "os dados\nSão as respostas da administração de 2009\nProgramme of International Student Assessment (PISA)\n\ndata(pisaitems)\n\ndim(pisaitems)\n\n[1] 66690    81"
+  },
+  {
+    "objectID": "Likert5.html#section-14",
+    "href": "Likert5.html#section-14",
+    "title": "dataVizR3",
+    "section": "",
+    "text": "66690 x 81\n\ntibble(pisaitems)\n\n# A tibble: 66,690 × 81\n   CNT   ST24Q01 ST24Q02 ST24Q03 ST24Q04 ST24Q05 ST24Q06 ST24Q07 ST24Q08 ST24Q09\n   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  \n 1 Cana… Disagr… Strong… Strong… Strong… Strong… Strong… Agree   Disagr… Strong…\n 2 Cana… Agree   Strong… Strong… Strong… Strong… Agree   Strong… Agree   Strong…\n 3 Cana… Strong… Strong… Strong… Agree   Strong… Strong… Strong… Agree   Disagr…\n 4 Cana… Disagr… Disagr… Agree   Strong… Disagr… Disagr… Agree   Strong… Strong…\n 5 Cana… Strong… Disagr… Strong… Disagr… Strong… Disagr… Disagr… Agree   Agree  \n 6 Cana… Agree   Strong… Strong… Agree   Strong… Agree   Strong… Agree   Strong…\n 7 Cana… Disagr… Disagr… Disagr… Strong… Disagr… Disagr… Disagr… Strong… Agree  \n 8 Cana… Agree   Strong… Strong… Agree   Agree   Disagr… Strong… Disagr… Strong…\n 9 Cana… Agree   Agree   Disagr… Agree   Strong… Agree   Disagr… Agree   Agree  \n10 Cana… Strong… Strong… Strong… Agree   Disagr… Strong… Strong… Strong… Strong…\n# ℹ 66,680 more rows\n# ℹ 71 more variables: ST24Q10 &lt;fct&gt;, ST24Q11 &lt;fct&gt;, ST25Q01 &lt;fct&gt;,\n#   ST25Q02 &lt;fct&gt;, ST25Q03 &lt;fct&gt;, ST25Q04 &lt;fct&gt;, ST25Q05 &lt;fct&gt;, ST26Q01 &lt;fct&gt;,\n#   ST26Q02 &lt;fct&gt;, ST26Q03 &lt;fct&gt;, ST26Q04 &lt;fct&gt;, ST26Q05 &lt;fct&gt;, ST26Q06 &lt;fct&gt;,\n#   ST26Q07 &lt;fct&gt;, ST27Q01 &lt;fct&gt;, ST27Q02 &lt;fct&gt;, ST27Q03 &lt;fct&gt;, ST27Q04 &lt;fct&gt;,\n#   ST27Q05 &lt;fct&gt;, ST27Q06 &lt;fct&gt;, ST27Q07 &lt;fct&gt;, ST27Q08 &lt;fct&gt;, ST27Q09 &lt;fct&gt;,\n#   ST27Q10 &lt;fct&gt;, ST27Q11 &lt;fct&gt;, ST27Q12 &lt;fct&gt;, ST27Q13 &lt;fct&gt;, …"
+  },
+  {
+    "objectID": "Likert5.html#examinando-uma-variável",
+    "href": "Likert5.html#examinando-uma-variável",
+    "title": "dataVizR3",
+    "section": "examinando uma variável",
+    "text": "examinando uma variável\n\n\n\n\n\npisaitems %&gt;% \n  select(ST24Q01) %&gt;% \n  summary()\n\n\n\n\n              ST24Q01     \n Strongly disagree:14947  \n Disagree         :23515  \n Agree            :20000  \n Strongly agree   : 7029  \n NA's             : 1199"
+  },
+  {
+    "objectID": "Likert5.html#subconjunto-com-as-perguntas",
+    "href": "Likert5.html#subconjunto-com-as-perguntas",
+    "title": "dataVizR3",
+    "section": "subconjunto com as perguntas",
+    "text": "subconjunto com as perguntas\n\n\npisa_subset &lt;- pisaitems  %&gt;% \n  select(1:6) %&gt;% \n  setNames(c(\n    \"País\",\n    \"Eu só leio se eu tiver que ler.\",\n    \"Ler é um dos meus hobbies favoritos.\",\n    \"Gosto de conversar sobre livros com outras pessoas.\",\n    \"Acho difícil terminar livros.\",\n    \"Fico feliz se receber um livro de presente.\"\n  ))"
+  },
+  {
+    "objectID": "Likert5.html#a-estrutura-do-subconjunto",
+    "href": "Likert5.html#a-estrutura-do-subconjunto",
+    "title": "dataVizR3",
+    "section": "a estrutura do subconjunto",
+    "text": "a estrutura do subconjunto\n\n\n\nRows: 66,690\nColumns: 6\n$ País                                                  &lt;fct&gt; Canada, Canada, …\n$ `Eu só leio se eu tiver que ler.`                     &lt;fct&gt; Disagree, Agree,…\n$ `Ler é um dos meus hobbies favoritos.`                &lt;fct&gt; Strongly agree, …\n$ `Gosto de conversar sobre livros com outras pessoas.` &lt;fct&gt; Strongly agree, …\n$ `Acho difícil terminar livros.`                       &lt;fct&gt; Strongly disagre…\n$ `Fico feliz se receber um livro de presente.`         &lt;fct&gt; Strongly agree, …"
+  },
+  {
+    "objectID": "Likert5.html#o-primeiro-gráfico",
+    "href": "Likert5.html#o-primeiro-gráfico",
+    "title": "dataVizR3",
+    "section": "O primeiro gráfico",
+    "text": "O primeiro gráfico\n\ncódigográfico\n\n\n\nlikert_out&lt;- select(pisa_subset,2:6)\n\nlikert_out&lt;-likert(as.data.frame(likert_out))\n\nplot(likert_out)"
+  },
+  {
+    "objectID": "Likert5.html#corrigindo-o-gráfico",
+    "href": "Likert5.html#corrigindo-o-gráfico",
+    "title": "dataVizR3",
+    "section": "corrigindo o gráfico",
+    "text": "corrigindo o gráfico\n\ncolor &lt;- c(\"firebrick\",\"#C08A8B\",\"#92C492\",\"forestgreen\")\n\nlegend_order &lt;- c(\"Strongly disagree\", \"Disagree\", \"Agree\", \"Strongly agree\") \n\nplot(likert_out, \n     centered=TRUE,)+\n  scale_fill_manual(name=\"Respostas\", \n                    values=color,\n                    breaks=legend_order,\n                    labels=c('discordo totalmente', 'discordo', \n                             'concordo', 'concordo totalmente'))+\n  ylab(\"Porcentagem\") +\n  xlab(\"Itens\")+\n  theme(text=element_text(size=11),\n        legend.position = \"bottom\",\n        legend.justification = \"right\",\n        legend.direction = \"horizontal\",\n        legend.margin = margin(t = 3),\n        axis.text.y = element_text(angle = 0),\n        legend.key.size = unit(0.5, \"cm\"),\n        legend.text = element_text(size = 11),\n        plot.margin = margin(t = 15, r = 5, b = 10, l = 5))"
+  },
+  {
+    "objectID": "Likert5.html#como-ficou",
+    "href": "Likert5.html#como-ficou",
+    "title": "dataVizR3",
+    "section": "como ficou",
+    "text": "como ficou"
+  },
+  {
+    "objectID": "Likert5.html#outras-possibilidades",
+    "href": "Likert5.html#outras-possibilidades",
+    "title": "dataVizR3",
+    "section": "outras possibilidades",
+    "text": "outras possibilidades"
+  },
+  {
+    "objectID": "Likert5.html#modificações",
+    "href": "Likert5.html#modificações",
+    "title": "dataVizR3",
+    "section": "modificações",
+    "text": "modificações\n\nlikert_out_group&lt;-likert(as.data.frame(pisa_subset[,2:4]), \n                         grouping=pisa_subset$País)\n\nplot(likert_out_group, group.order=c('Mexico','Canada','United States')) +\n  scale_fill_manual(name=\"Respostas\", \n                    values=color,\n                    breaks=legend_order,\n                    labels=c('discordo totalmente', 'discordo', \n                             'concordo', 'concordo totalmente'))+\n  ylab(\"Porcentagem\") +\n  xlab(\"Paises\")+\n  \n  scale_x_discrete(labels = c('México', 'Canadá', 'Estados Unidos'))"
+  },
+  {
+    "objectID": "Likert5.html#a-opção-do-calor",
+    "href": "Likert5.html#a-opção-do-calor",
+    "title": "dataVizR3",
+    "section": "a opção do calor",
+    "text": "a opção do calor\n\n(heat&lt;-plot(likert_out, type=\"heat\"))"
+  },
+  {
+    "objectID": "Likert5.html#complica-bastante",
+    "href": "Likert5.html#complica-bastante",
+    "title": "dataVizR3",
+    "section": "complica bastante",
+    "text": "complica bastante\n\n\n\nfunction (likert, low.color = \"white\", high.color = \"blue\", text.color = \"black\", \n    text.size = 4, wrap = 50, ...) \n{\n    if (!is.null(likert$grouping)) {\n        stop(\"heat plots with grouping are not supported.\")\n    }\n    lsum &lt;- summary(likert)\n    results = reshape2::melt(likert$results, id.vars = \"Item\")\n    results$variable = as.character(results$variable)\n    results$label = paste(format(results$value, digits = 2, drop0trailing = FALSE), \n        \"%\", sep = \"\")\n    tmp = data.frame(Item = lsum$Item, variable = rep(\"Mean (SD)\", \n        nrow(lsum)), value = rep(-100, nrow(lsum)), label = paste(format(lsum$mean, \n        digits = 3, drop0trailing = FALSE), \" (\", format(lsum$sd, \n        digits = 2, drop0trailing = FALSE), \")\", sep = \"\"), stringsAsFactors = FALSE)\n    results = rbind(tmp, results)\n    p = ggplot(results, aes(x = Item, y = variable, fill = value, \n        label = label)) + scale_y_discrete(limits = c(\"Mean (SD)\", \n        names(likert$results)[2:ncol(likert$results)])) + geom_tile() + \n        geom_text(size = text.size, colour = text.color) + coord_flip() + \n        scale_fill_gradient2(\"Percent\", low = \"white\", mid = low.color, \n            high = high.color, limits = c(0, 100)) + xlab(\"\") + \n        ylab(\"\") + theme(panel.grid.major = element_blank(), \n        panel.grid.minor = element_blank(), axis.ticks = element_blank(), \n        panel.background = element_blank()) + scale_x_discrete(breaks = likert$results$Item, \n        labels = label_wrap_mod(likert$results$Item, width = wrap))\n    class(p) &lt;- c(\"likert.heat.plot\", class(p))\n    return(p)\n}\n&lt;bytecode: 0x556060f07410&gt;\n&lt;environment: namespace:likert&gt;"
+  },
+  {
+    "objectID": "Likert5.html#ajustando-os-dados",
+    "href": "Likert5.html#ajustando-os-dados",
+    "title": "dataVizR3",
+    "section": "ajustando os dados",
+    "text": "ajustando os dados\n\n\ndados_calor &lt;- likert_out$results %&gt;%\n  pivot_longer(cols = -Item) %&gt;%\n  filter(name != \"Mean\") %&gt;%\n   mutate(name = factor(name, levels = c(\"Strongly disagree\",\n                                         \"Disagree\", \"Agree\",                                           \"Strongly agree\")))"
+  },
+  {
+    "objectID": "Likert5.html#o-bom-e-velho-ggplot2",
+    "href": "Likert5.html#o-bom-e-velho-ggplot2",
+    "title": "dataVizR3",
+    "section": "o bom e velho ggplot2",
+    "text": "o bom e velho ggplot2\n\n\ndados_calor %&gt;% ggplot(aes(x = name, y = Item, fill = value)) +\n  geom_tile() +\n  scale_fill_gradient2(low = muted(\"red\"), mid = \"white\",\n                       high = muted(\"blue\"), midpoint = 0) +\n  geom_text(aes(label = round(value, digits = 1))) +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))+\n   scale_x_discrete(labels=c('Discordo totalmente',\n                             'Discordo','Concordo',\n                             'Concordo totalmente'))+\n  xlab(\"Respostas\")+\n  ylab(\"Perguntas\")+\n  guides(fill = guide_colorbar(title = \"Valores\"))"
+  },
+  {
+    "objectID": "Likert5.html#igualzinho",
+    "href": "Likert5.html#igualzinho",
+    "title": "dataVizR3",
+    "section": "igualzinho…",
+    "text": "igualzinho…"
+  },
+  {
+    "objectID": "Likert5.html#tabelas",
+    "href": "Likert5.html#tabelas",
+    "title": "dataVizR3",
+    "section": "tabelas",
+    "text": "tabelas\n\n\nlikert_out&lt;- select(pisa_subset,2:6)\n\nlikert_out&lt;-likert(as.data.frame(likert_out))\nlikert_out$results[, 2:5] &lt;- round(likert_out$results[, 2:5],digits = 2)\ngt(likert_out$results)"
+  },
+  {
+    "objectID": "Likert5.html#de-novo",
+    "href": "Likert5.html#de-novo",
+    "title": "dataVizR3",
+    "section": "de novo…",
+    "text": "de novo…\n\n\n\n\n\n\n\n\nItem\nStrongly disagree\nDisagree\nAgree\nStrongly agree\n\n\n\n\nEu só leio se eu tiver que ler.\n22.82\n35.91\n30.54\n10.73\n\n\nLer é um dos meus hobbies favoritos.\n20.32\n36.32\n31.93\n11.42\n\n\nGosto de conversar sobre livros com outras pessoas.\n21.25\n33.74\n35.96\n9.05\n\n\nAcho difícil terminar livros.\n24.96\n40.39\n26.51\n8.14\n\n\nFico feliz se receber um livro de presente.\n19.28\n27.65\n40.17\n12.89"
+  },
+  {
+    "objectID": "Likert5.html#em-português",
+    "href": "Likert5.html#em-português",
+    "title": "dataVizR3",
+    "section": "em português",
+    "text": "em português\n\n\nlikert_out$results &lt;- likert_out$results %&gt;%\n  mutate(across(2:5, ~paste0(sprintf(\"%.2f\", .), \"%\")))\ncolnames(likert_out$results) &lt;- c(\"Itens\", \"Discordo totalmente\", \n                                  \"Discordo\", \"Concordo\", \"Concordo totalmente\")\ngt(likert_out$results)"
+  },
+  {
+    "objectID": "Likert5.html#tabelas-1",
+    "href": "Likert5.html#tabelas-1",
+    "title": "dataVizR3",
+    "section": "Tabelas",
+    "text": "Tabelas\n\n\n\n\n\n\n\n\n\nItens\nDiscordo totalmente\nDiscordo\nConcordo\nConcordo totalmente\n\n\n\n\nEu só leio se eu tiver que ler.\n22.82%\n35.91%\n30.54%\n10.73%\n\n\nLer é um dos meus hobbies favoritos.\n20.32%\n36.32%\n31.93%\n11.42%\n\n\nGosto de conversar sobre livros com outras pessoas.\n21.25%\n33.74%\n35.96%\n9.05%\n\n\nAcho difícil terminar livros.\n24.96%\n40.39%\n26.51%\n8.14%\n\n\nFico feliz se receber um livro de presente.\n19.28%\n27.65%\n40.17%\n12.89%"
+  },
+  {
+    "objectID": "Likert5.html#referências",
+    "href": "Likert5.html#referências",
+    "title": "dataVizR3",
+    "section": "referências",
+    "text": "referências\nBRYER, J.; SPEERSCHNEIDER, K. likert: Analysis and Visualization Likert Items. , 31 dez. 2016. Disponível em: https://cran.r-project.org/web/packages/likert/index.html. Acesso em: 7 maio. 2023\nCLS | Reading for pleasure puts children ahead in the classroom, study finds. , [s.d.]. Disponível em: https://cls.ucl.ac.uk/reading-for-pleasure-puts-children-ahead-in-the-classroom-study-finds/. Acesso em: 7 maio. 2023\nEntendendo ggplot2. , 24 ago. 2021. Disponível em: https://www.youtube.com/watch?v=DYsPRa3vpf0. Acesso em: 7 maio. 2023\nKOMPERDA, R. Likert-Type Survey Data Analysis with R and RStudio. Em: GUPTA, T. (Ed.). ACS Symposium Series. Washington, DC: American Chemical Society, 2017. v. 1260p. 91–116.\nKOSTOULAS, A. Likert scales: Four things you may not know (Achilleas Kostoulas). Disponível em: https://achilleaskostoulas.com/2013/09/09/four-things-you-probably-didnt-know-about-likert-scales/. Acesso em: 7 maio. 2023.\nLikert scale | social science | Britannica. Disponível em: https://www.britannica.com/biography/Rensis-Likert. Acesso em: 7 maio. 2023.\nReading for Pleasure: The Impact of Teachers in Secondary School. Disponível em: https://www.pearson.com/uk/educators/schools/news/schools-blog/2021/09/reading-for-pleasure.html. Acesso em: 7 maio. 2023.\nRensis Likert Biography + Leadership Styles. Practical Psychology, 23 mar. 2021. Disponível em: https://practicalpie.com/rensis-likert/. Acesso em: 7 maio. 2023\nSARKAR, D. et al. lattice: Trellis Graphics for R. , 5 abr. 2023. Disponível em: https://cran.r-project.org/web/packages/lattice/index.html. Acesso em: 7 maio.\nSILVA, M. J. M. DA; SANTOS, A. A. A. DOS. A avaliação da compreensão em leitura e o desempenho acadêmico de universitários. Psicologia em Estudo, v. 9, n. 3, dez. 2004.\nSTOROPOLI, J.; VILS, L. Estatística com R: Likert e Escalas Ordinais. 11 jan. 2021. WICKHAM, H. et al. ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics. , 3 abr. 2023. Disponível em: https://cran.r-project.org/web/packages/ggplot2/index.html Acesso em: 7 maio. 2023\nWICKHAM, H.; SEIDEL, D.; RSTUDIO. scales: Scale Functions for Visualization. , 20 ago. 2022. Disponível em: https://cran.r-project.org/web/packages/scales/index.html. Acesso em: 7 maio. 2023"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "tarefas/instruções.html",
+    "href": "tarefas/instruções.html",
+    "title": "Tarefas 1",
+    "section": "",
+    "text": "Tarefas 1\nContribuir com o repositório [dataVizR3] 1. Criar um fork do repositório dataVizR3\n\nClone o seu fork para o seu computador git clone endereco_do_seu_fork\nAdicione o repositorio original como upstream (git remote add upstream https://github.com/nextmarte/dataVizR3) - use git pull upstream main para atualizar o seu fork com as mudanças do repositório original.\nCrie uma branch com seu nome completo ex: git checkout -b seu_nome_completo\nNavegue até a pasta tarefas, crie umas pasta com seu nome e coloque o arquivo do dashboard que você criou na aula 2 (caso não tenha feito, crie um arquivo .md com seu nome completo) e faça um git add. e git commit com a mensagem “Adicionando dashboard de [seu nome]”\nFaça um commit com a mensagem “Adicionando dashboard de [seu nome]”\nFaça um push da sua branch(seu_nome_completo) para o seu fork (git push origin seu_nome_completo)\nFaça um pull request da sua branch para a branch main do repositório original usando a interface do GitHub.\n\n\n\nTarefas 2\nCrie e faça deploy de um projeto QUARTO no GitHub pages usando o dashboard que você criou na aula 2 e qualquer outro material que você queira adicionar ou tenha criado durante o curso. Adicione o link do seu projeto no campo atividades do arquivo README.md do repositório [dataVizR3] através de um pull request.\n\n\nRecursos adicionais\nícones bootstrap\nícones fontawesome\nícones material design\nícones flaticon\nExtensões QUARTO"
+  },
+  {
     "objectID": "apresentacao.html#controle-de-versão-centralizado",
     "href": "apresentacao.html#controle-de-versão-centralizado",
     "title": "Git e GitHub básico",
@@ -75,20 +250,6 @@
     "title": "Git e GitHub básico",
     "section": "Referencias",
     "text": "Referencias\nGit\nQaOps Explicando git | estrutura de árvore - Rafael Lima\nGitHub\nHome\n\n\n\nUniversidade Federal Fluminense - Programa de formação de executivos - Ciência de dados"
-  },
-  {
-    "objectID": "tarefas/instruções.html",
-    "href": "tarefas/instruções.html",
-    "title": "Tarefas 1",
-    "section": "",
-    "text": "Tarefas 1\nContribuir com o repositório [dataVizR3] 1. Criar um fork do repositório dataVizR3\n\nClone o seu fork para o seu computador git clone endereco_do_seu_fork\nAdicione o repositorio original como upstream (git remote add upstream https://github.com/nextmarte/dataVizR3) - use git pull upstream main para atualizar o seu fork com as mudanças do repositório original.\nCrie uma branch com seu nome completo ex: git checkout -b seu_nome_completo\nNavegue até a pasta tarefas, crie umas pasta com seu nome e coloque o arquivo do dashboard que você criou na aula 2 (caso não tenha feito, crie um arquivo .md com seu nome completo) e faça um git add. e git commit com a mensagem “Adicionando dashboard de [seu nome]”\nFaça um commit com a mensagem “Adicionando dashboard de [seu nome]”\nFaça um push da sua branch(seu_nome_completo) para o seu fork (git push origin seu_nome_completo)\nFaça um pull request da sua branch para a branch main do repositório original usando a interface do GitHub.\n\n\n\nTarefas 2\nCrie e faça deploy de um projeto QUARTO no GitHub pages usando o dashboard que você criou na aula 2 e qualquer outro material que você queira adicionar ou tenha criado durante o curso. Adicione o link do seu projeto no campo atividades do arquivo README.md do repositório [dataVizR3] através de um pull request.\n\n\nRecursos adicionais\nícones bootstrap\nícones fontawesome\nícones material design\nícones flaticon\nExtensões QUARTO"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
   },
   {
     "objectID": "readme.html",

@@ -1,0 +1,449 @@
+---
+title: ""
+format:
+  revealjs:
+    theme: night
+editor: visual
+---
+
+#  {background-color="black"}
+
+![](images/Likert_R/2.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/3.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/4.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/5.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/6.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/7.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/8.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/9.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/10.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/11.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/12.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/13.png)
+
+#  {background-color="black"}
+
+![](images/Likert_R/14.png)
+
+#  {background-color="black"}
+
+## código
+
+## setup {style="font-size:4 5px"}
+
+<br>
+
+```{r}
+#| echo: true
+#| include: true
+
+
+if(!require(pacman)){install.packages("pacman")}
+pacman::p_load(tidyverse,scales, likert,gt)
+
+
+```
+
+## o pacote likert
+
+<br>
+
+![](images/vignette_likert.jpg)
+
+## os dados
+
+São as respostas da administração de 2009
+
+Programme of International Student Assessment (PISA)
+
+```{r}
+#| echo: true
+#| include: true
+
+data(pisaitems)
+
+dim(pisaitems)
+```
+
+## 
+
+66690 x 81
+
+```{r}
+#| echo: true
+#| include: true
+
+tibble(pisaitems)
+```
+
+## examinando uma variável
+
+<Br>
+
+<BR>
+
+::: columns
+::: {.column width="50%" style="font-size:40px"}
+```{r, echo=TRUE, eval=FALSE, include=TRUE}
+
+
+pisaitems %>% 
+  select(ST24Q01) %>% 
+  summary()
+
+
+```
+:::
+
+::: {.column width="50%" style="font-size:45px"}
+```{r}
+
+#| echo: true
+#| eval: true
+
+
+pisaitems %>% 
+  select(ST24Q01) %>% 
+  summary()
+
+
+```
+:::
+:::
+
+## subconjunto com as perguntas
+
+<br><br>
+
+```{r}
+#| echo: true
+#| eval: true
+
+
+pisa_subset <- pisaitems  %>% 
+  select(1:6) %>% 
+  setNames(c(
+    "País",
+    "Eu só leio se eu tiver que ler.",
+    "Ler é um dos meus hobbies favoritos.",
+    "Gosto de conversar sobre livros com outras pessoas.",
+    "Acho difícil terminar livros.",
+    "Fico feliz se receber um livro de presente."
+  ))
+```
+
+## a estrutura do subconjunto
+
+<br><br>
+
+```{r}
+pisa_subset %>% glimpse()
+```
+
+## O primeiro gráfico
+
+::: panel-tabset
+## código
+
+```{r , echo=TRUE, eval=FALSE, include=TRUE}
+
+
+likert_out<- select(pisa_subset,2:6)
+
+likert_out<-likert(as.data.frame(likert_out))
+
+plot(likert_out)
+
+```
+
+## gráfico
+
+```{r, echo=F, eval=TRUE, include=TRUE}
+
+likert_out<- select(pisa_subset,2:6)
+
+likert_out<-likert(as.data.frame(likert_out))
+
+plot(likert_out)
+
+```
+:::
+
+## corrigindo o gráfico
+
+```{r , echo=TRUE, eval=FALSE, include=TRUE}
+
+color <- c("firebrick","#C08A8B","#92C492","forestgreen")
+
+legend_order <- c("Strongly disagree", "Disagree", "Agree", "Strongly agree") 
+
+plot(likert_out, 
+     centered=TRUE,)+
+  scale_fill_manual(name="Respostas", 
+                    values=color,
+                    breaks=legend_order,
+                    labels=c('discordo totalmente', 'discordo', 
+                             'concordo', 'concordo totalmente'))+
+  ylab("Porcentagem") +
+  xlab("Itens")+
+  theme(text=element_text(size=11),
+        legend.position = "bottom",
+        legend.justification = "right",
+        legend.direction = "horizontal",
+        legend.margin = margin(t = 3),
+        axis.text.y = element_text(angle = 0),
+        legend.key.size = unit(0.5, "cm"),
+        legend.text = element_text(size = 11),
+        plot.margin = margin(t = 15, r = 5, b = 10, l = 5))
+
+```
+
+## como ficou
+
+```{r, echo=F, eval=TRUE, include=TRUE}
+
+color <- c("firebrick","#C08A8B","#92C492","forestgreen")
+
+legend_order <- c("Strongly disagree", "Disagree", "Agree", "Strongly agree") 
+
+plot(likert_out, 
+     centered=TRUE,)+
+  scale_fill_manual(name="Respostas", 
+                    values=color,
+                    breaks=legend_order,
+                    labels=c('discordo totalmente', 'discordo', 
+                             'concordo', 'concordo totalmente'))+
+  ylab("Porcentagem") +
+  xlab("Itens")+
+  theme(text=element_text(size=11),
+        legend.position = "bottom",
+        legend.justification = "right",
+        legend.direction = "horizontal",
+        legend.margin = margin(t = 3),
+        axis.text.y = element_text(angle = 0),
+        legend.key.size = unit(0.5, "cm"),
+        legend.text = element_text(size = 11),
+        plot.margin = margin(t = 15, r = 5, b = 10, l = 5))
+
+```
+
+## outras possibilidades
+
+```{r, echo=F, eval=TRUE, include=TRUE}
+
+
+likert_out_group<-likert(as.data.frame(pisa_subset[,2:4]), 
+                         grouping=pisa_subset$País)
+
+plot(likert_out_group, group.order=c('Mexico','Canada','United States')) +
+  scale_fill_manual(name="Respostas", 
+                    values=color,
+                    breaks=legend_order,
+                    labels=c('discordo totalmente', 'discordo', 
+                             'concordo', 'concordo totalmente'))+
+  ylab("Porcentagem") +
+  xlab("Paises")+
+  theme(text=element_text(size=11),
+        legend.position = "bottom",
+        legend.justification = "right",
+        legend.direction = "horizontal",
+        legend.margin = margin(t = 3),
+        axis.text.y = element_text(angle = 15),
+        legend.key.size = unit(0.5, "cm"),
+        legend.text = element_text(size = 11),
+        plot.margin = margin(t = 15, r = 5, b = 10, l = 5))+
+  scale_x_discrete(labels = c('México', 'Canadá', 'Estados Unidos'))
+```
+
+## modificações
+
+```{r , echo=TRUE, eval=FALSE, include=TRUE}
+
+likert_out_group<-likert(as.data.frame(pisa_subset[,2:4]), 
+                         grouping=pisa_subset$País)
+
+plot(likert_out_group, group.order=c('Mexico','Canada','United States')) +
+  scale_fill_manual(name="Respostas", 
+                    values=color,
+                    breaks=legend_order,
+                    labels=c('discordo totalmente', 'discordo', 
+                             'concordo', 'concordo totalmente'))+
+  ylab("Porcentagem") +
+  xlab("Paises")+
+  
+  scale_x_discrete(labels = c('México', 'Canadá', 'Estados Unidos'))
+```
+
+## a opção do calor
+
+```{r, echo=TRUE}
+(heat<-plot(likert_out, type="heat"))
+```
+
+## complica bastante
+
+<br>
+
+```{r}
+likert.heat.plot
+```
+
+## ajustando os dados
+
+<br><br>
+
+```{r , echo=TRUE, eval=TRUE, include=TRUE}
+
+
+dados_calor <- likert_out$results %>%
+  pivot_longer(cols = -Item) %>%
+  filter(name != "Mean") %>%
+   mutate(name = factor(name, levels = c("Strongly disagree",
+                                         "Disagree", "Agree",                                           "Strongly agree")))
+
+```
+
+## o bom e velho ggplot2
+
+<br>
+
+```{r , echo=TRUE, eval=FALSE, include=TRUE}
+
+
+dados_calor %>% ggplot(aes(x = name, y = Item, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = muted("red"), mid = "white",
+                       high = muted("blue"), midpoint = 0) +
+  geom_text(aes(label = round(value, digits = 1))) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+   scale_x_discrete(labels=c('Discordo totalmente',
+                             'Discordo','Concordo',
+                             'Concordo totalmente'))+
+  xlab("Respostas")+
+  ylab("Perguntas")+
+  guides(fill = guide_colorbar(title = "Valores"))
+```
+
+## igualzinho...
+
+```{r , echo=FALSE, eval=TRUE, include=TRUE}
+dados_calor %>% ggplot(aes(x = name, y = Item, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient2(low = muted("red"), mid = "white", high = muted("blue"), midpoint = 0) +
+  geom_text(aes(label = round(value, digits = 1))) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  scale_x_discrete(labels=c('Discordo totalmente', 'Discordo','Concordo','Concordo totalmente'))+
+  xlab("Respostas")+
+  ylab("Perguntas")+
+  guides(fill = guide_colorbar(title = "Valores"))
+```
+
+## tabelas
+
+<br>
+
+```{r , echo=TRUE, eval=FALSE, include=TRUE}
+likert_out<- select(pisa_subset,2:6)
+
+likert_out<-likert(as.data.frame(likert_out))
+likert_out$results[, 2:5] <- round(likert_out$results[, 2:5],digits = 2)
+gt(likert_out$results)
+
+```
+
+## de novo... {style="font-size:30px"}
+
+```{r , , echo=FALSE, eval=TRUE, include=TRUE}
+likert_out<- select(pisa_subset,2:6)
+
+likert_out<-likert(as.data.frame(likert_out))
+likert_out$results[, 2:5] <- round(likert_out$results[, 2:5],digits = 2)
+gt(likert_out$results)
+
+```
+
+## em português {style="font-size:35px"}
+
+<br>
+
+```{r , echo=TRUE, eval=FALSE, include=TRUE}
+likert_out$results <- likert_out$results %>%
+  mutate(across(2:5, ~paste0(sprintf("%.2f", .), "%")))
+colnames(likert_out$results) <- c("Itens", "Discordo totalmente", 
+                                  "Discordo", "Concordo", "Concordo totalmente")
+gt(likert_out$results)
+```
+
+## Tabelas {style="font-size:25px"}
+
+<br>
+
+```{r , echo=FALSE, eval=TRUE, include=TRUE}
+likert_out$results <- likert_out$results %>%
+  mutate(across(2:5, ~paste0(sprintf("%.2f", .), "%")))
+colnames(likert_out$results) <- c("Itens", "Discordo totalmente", "Discordo", "Concordo", "Concordo totalmente")
+gt(likert_out$results)
+```
+
+## referências {style="font-size: 15px"}
+
+BRYER, J.; SPEERSCHNEIDER, K. likert: Analysis and Visualization Likert Items. , 31 dez. 2016. Disponível em: <https://cran.r-project.org/web/packages/likert/index.html>. Acesso em: 7 maio. 2023
+
+CLS \| Reading for pleasure puts children ahead in the classroom, study finds. , \[s.d.\]. Disponível em: <https://cls.ucl.ac.uk/reading-for-pleasure-puts-children-ahead-in-the-classroom-study-finds/>. Acesso em: 7 maio. 2023
+
+Entendendo ggplot2. , 24 ago. 2021. Disponível em: <https://www.youtube.com/watch?v=DYsPRa3vpf0>. Acesso em: 7 maio. 2023
+
+KOMPERDA, R. Likert-Type Survey Data Analysis with R and RStudio. Em: GUPTA, T. (Ed.). ACS Symposium Series. Washington, DC: American Chemical Society, 2017. v. 1260p. 91--116.
+
+KOSTOULAS, A. Likert scales: Four things you may not know (Achilleas Kostoulas). Disponível em: <https://achilleaskostoulas.com/2013/09/09/four-things-you-probably-didnt-know-about-likert-scales/>. Acesso em: 7 maio. 2023.
+
+Likert scale \| social science \| Britannica. Disponível em: <https://www.britannica.com/biography/Rensis-Likert>. Acesso em: 7 maio. 2023.
+
+Reading for Pleasure: The Impact of Teachers in Secondary School. Disponível em: <https://www.pearson.com/uk/educators/schools/news/schools-blog/2021/09/reading-for-pleasure.html>. Acesso em: 7 maio. 2023.
+
+Rensis Likert Biography + Leadership Styles. Practical Psychology, 23 mar. 2021. Disponível em: <https://practicalpie.com/rensis-likert/>. Acesso em: 7 maio. 2023
+
+SARKAR, D. et al. lattice: Trellis Graphics for R. , 5 abr. 2023. Disponível em: <https://cran.r-project.org/web/packages/lattice/index.html>. Acesso em: 7 maio.
+
+SILVA, M. J. M. DA; SANTOS, A. A. A. DOS. A avaliação da compreensão em leitura e o desempenho acadêmico de universitários. Psicologia em Estudo, v. 9, n. 3, dez. 2004.
+
+STOROPOLI, J.; VILS, L. Estatística com R: Likert e Escalas Ordinais. 11 jan. 2021. WICKHAM, H. et al. ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics. , 3 abr. 2023. Disponível em: <https://cran.r-project.org/web/packages/ggplot2/index.html> Acesso em: 7 maio. 2023
+
+WICKHAM, H.; SEIDEL, D.; RSTUDIO. scales: Scale Functions for Visualization. , 20 ago. 2022. Disponível em: <https://cran.r-project.org/web/packages/scales/index.html>. Acesso em: 7 maio. 2023
+
+##  {style="font-size: 15px"}
+
+![](images/Likert_R/5.png)
