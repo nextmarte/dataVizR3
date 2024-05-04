@@ -49,6 +49,7 @@ git config --global user.email "Se_email"
 # Tarefas 1
 
 Contribuir com o repositório [dataVizR3]
+
 1. Criar um fork do repositório [dataVizR3](https://github.com/nextmarte/dataVizR3)
 
 2. Clone o seu fork para o seu computador `git clone endereco_do_seu_fork`
