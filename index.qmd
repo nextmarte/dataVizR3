@@ -20,9 +20,9 @@ No git bash, execute os seguintes comandos:
 
 ```bash
 
-git config --global user.name "Seu Nome"
+git config --global user.name "Seu_Nome"
 
-git config --global user.email "
+git config --global user.email "Se_email"
 
 ```
 
