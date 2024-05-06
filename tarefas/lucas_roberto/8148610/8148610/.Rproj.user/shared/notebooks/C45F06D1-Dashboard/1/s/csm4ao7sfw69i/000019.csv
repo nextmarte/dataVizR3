@@ -1,0 +1,4 @@
+"0","total_gols_por_equipe <- gols %>%"
+"0","  group_by(clube) %>%"
+"0","  summarise(Total_Gols = n())"
+"0",""

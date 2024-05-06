@@ -1,0 +1,8 @@
+"0","cartoes <- read.csv(""campeonato-brasileiro-cartoes.csv"")"
+"0","estatisticas <- read.csv(""campeonato-brasileiro-estatisticas-full.csv"")"
+"0","full <- read.csv(""campeonato-brasileiro-full.csv"")"
+"0","gols <- read.csv(""campeonato-brasileiro-gols.csv"")"
+"0","view(cartoes)"
+"0","view(estatisticas)"
+"0","view(full)"
+"0","view(gols)"

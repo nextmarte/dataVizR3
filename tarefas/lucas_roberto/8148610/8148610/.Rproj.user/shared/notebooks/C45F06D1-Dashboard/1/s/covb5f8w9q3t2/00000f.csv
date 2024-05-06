@@ -1,0 +1,3 @@
+"0","# Agora por posicao"
+"0","contagem_cartoes_posicao <- aggregate(cartao ~ posicao, data = cartoes, FUN = length)"
+"0","colnames(contagem_cartoes_posicao) <- c(""Posicao"", ""Total_Cartoes"")"
