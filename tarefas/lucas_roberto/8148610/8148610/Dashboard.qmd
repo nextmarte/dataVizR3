@@ -1,0 +1,138 @@
+---
+title: "Posturas mais agressivas garantem mais gols e vitórias?"
+author: "Lucas Roberto"
+format: 
+  dashboard:
+    orientation: rows
+editor: visual
+execute:
+  warning: false
+  message: false
+---
+
+
+```{r}
+#Preparando as bibliotecas utilizadas
+library(tidyverse)
+library(esquisse)
+library(dplyr)
+```
+
+```{r}
+#Lendo cada um dos arquivos.csv disponíveis
+cartoes <- read.csv("campeonato-brasileiro-cartoes.csv")
+estatisticas <- read.csv("campeonato-brasileiro-estatisticas-full.csv")
+full <- read.csv("campeonato-brasileiro-full.csv")
+gols <- read.csv("campeonato-brasileiro-gols.csv")
+
+```
+
+```{r}
+#Bloco dedicado para criação dos gráficos no esquisse
+#esquisse:::esquisser()
+```
+
+Nosso objetivo é descobrir se os times que obtém mais cartões amarelos e vermelhos também conseguem mais gols e/ou mais vitórias.
+
+# Page 1
+5 times com mais cartões em ordem crescente: Palmeiras, Internacional, Santos, São Paulo e Fluminense.
+
+Posições com mais faltas em ordem crescente: meio campistas e zagueiros
+
+## Row
+```{r}
+# Agregando os cartões por clube e os somando. Com isso, veremos quais clubes obtiveram mais cartões
+contagem_cartoes <- aggregate(cartao ~ clube, data = cartoes, FUN = length)
+colnames(contagem_cartoes) <- c("Clube", "Total_Cartoes")
+
+ggplot(contagem_cartoes) +
+  aes(x = Clube, y = Total_Cartoes) +
+  geom_col(fill = "#112446") +
+  labs(
+    x = "Clube",
+    y = "Contagem",
+    title = "Clubes Brasileiros com o maior número de cartões"
+  ) +
+  coord_flip() +
+  theme_minimal()
+
+```
+
+## Row
+```{r}
+# Agora por posicao
+contagem_cartoes_posicao <- aggregate(cartao ~ posicao, data = cartoes, FUN = length)
+colnames(contagem_cartoes_posicao) <- c("Posicao", "Total_Cartoes")
+
+contagem_cartoes_posicao %>%
+ filter(!(Posicao %in% "")) %>%
+ ggplot() +
+  aes(x = Posicao, y = Total_Cartoes) +
+  geom_col(fill = "#112446") +
+  labs(
+    x = "Posicao",
+    y = "Contagem",
+    title = "Posições com maior número de cartões"
+  ) +
+  theme_minimal()
+```
+
+# Page 2
+Times com mais gols em ordem crescente: São Paulo, Santos, Atlético-MG, Palmeiras e Flamengo 
+
+Times mais vitoriosos em ordem crescente: Santos, Corinthians, Atlético-MG, Palmeiras e Flamengo.
+
+
+## Column
+```{r}
+#Agregando gols por equipe, dessa vez com a biblioteca diplyr
+total_gols_por_equipe <- gols %>%
+  group_by(clube) %>%
+  summarise(Total_Gols = n())
+
+ggplot(total_gols_por_equipe) +
+  aes(x = clube, y = Total_Gols) +
+  geom_col(fill = "#112446") +
+  labs(x = "Clube", y = "Contagem", title = "Gols por clube") +
+  coord_flip() +
+  theme_minimal()
+
+```
+
+## Column
+```{r}
+# Removendo valores - na coluna "vencedor"
+full.1 <- full[full$vencedor != "-", ]
+
+# Filtrando os dados para manter apenas os valores de id de 4600 para cima. Dessa forma, podemos garantir que estamos em um intervalo próximo de id de partida para comparação com as demais tabelas.
+full_filtrado <- full.1 %>%
+  filter(ID >= 4600)
+
+# Contando o número de ocorrências de cada elemento na coluna "vencedor"
+contagem_vencedor <- table(full_filtrado$vencedor)
+
+# Criando um data frame a partir da contagem
+df_contagem_vencedor <- as.data.frame(contagem_vencedor)
+
+# Renomeando as colunas do data frame
+colnames(df_contagem_vencedor) <- c("Vencedor", "Contagem")
+
+ggplot(df_contagem_vencedor) +
+  aes(x = Vencedor, y = Contagem) +
+  geom_col(fill = "#112446") +
+  labs(
+    x = "Clube",
+    y = "Contagem",
+    title = "Maiores vencedores"
+  ) +
+  coord_flip() +
+  theme_minimal()
+
+```
+
+
+# Page 3
+
+Analisando os gráficos, podemos iniciar considerando que esses resultados podem ser resultado direto de: clubes com mais anos de série A tendo mais cartões, gols e vitórias em partidas do campeonato. Entretanto, ao analisarmos com cuidado esses três gráficos em específico, podemos ver que as distribuições para cada time são muito similares. Times com menos cartões tem , em proporções similares, menos gols e menos vitórias, assim como o inverso.
+
+Uma das possíveis explicações é que equipes menores  optam por um estilo de jogo mais conservador, onde evitam jogadas arriscadas e priorizam a defesa. Já equipes maiores adotam uma postura mais agressiva ao atacar e defender, recebendo mais cartões e ao mesmo tempo marcando mais gols e vencendo mais partidas. Clubes maiores (como os citados como tendo os maiores valores) também tendem a ter uma maior qualidade técnica do que a média, se destacando em outras áreas de jogo que influenciam vitórias/gols
