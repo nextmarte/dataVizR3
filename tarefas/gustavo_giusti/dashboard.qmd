@@ -1,0 +1,218 @@
+---
+title: "Análise de alguns dados do campeonato brasileiro"
+---
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+library(tidyverse)
+library(esquisse)
+library(readr)
+library(sqldf)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+campeonato_brasileiro_estatisticas_full <- read_csv("campeonato-brasileiro-estatisticas-full.csv")
+```
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+campeonato_brasileiro_gols <- read_csv("campeonato-brasileiro-gols.csv")
+#View(campeonato_brasileiro_gols)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+campeonato_brasileiro_full <- read_csv("campeonato-brasileiro-full.csv")
+#View(campeonato_brasileiro_full)
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+campeonato_brasileiro_cartoes <- read_csv("campeonato-brasileiro-cartoes.csv")
+#View(campeonato_brasileiro_cartoes)
+```
+# Page 1
+
+## Row
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+
+#l title: Análise do número de cartões dos times do eixo Rio-Sao Paulo
+campeonato_brasileiro_cartoes %>%
+ filter(clube %in% c("Botafogo-RJ", "Bragantino", 
+"Corinthians", "Flamengo", "Fluminense", "Palmeiras", "Santos", "Sao Paulo", "Vasco")) %>%
+ ggplot() +
+  aes(x = clube, fill = cartao) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = "Clube",
+    y = "Número de Cartões",
+    title = "Número de cartões por clube do eixo RJ-SP",
+    subtitle = "Quais clubes foram mais punidos pelo juiz com cartão",
+    fill = "Cor do Cartão"
+  ) +
+  theme_minimal()
+```
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+campeonato_brasileiro_cartoes %>%
+ filter(!(posicao %in% "Zagueira") & !is.na(posicao)) %>%
+ ggplot() +
+  aes(x = posicao, fill = cartao) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = "Posição",
+    y = "Número de Cartões",
+    title = "Posição com maior número de cartão",
+    subtitle = "Quais posições foram mais punidas pelo juiz com cartão",
+    fill = "Cor do Cartão"
+  ) +
+  theme_minimal()
+```
+
+
+## Column
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+gols <- read_csv("campeonato-brasileiro-gols.csv")
+
+clube_gols <- sqldf("
+
+SELECT
+
+clube,
+count(*) gols
+      
+      
+      
+FROM gols 
+
+group by  clube
+
+order by count(*) desc,clube
+")
+```
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+ggplot(clube_gols) +
+  aes(x = reorder(clube, -gols), y = gols, fill = clube) +  # Ordena os clubes de acordo com os valores de gols
+  geom_col() +
+  geom_text(aes(label = gols), position = position_stack(vjust = 0.5), color = "black", size = 2, angle = 90, hjust = 0.5) +  # Adiciona os valores dos gols dentro de cada barra
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = "Clubes",
+    y = "Gols",
+    title = "Total de gols por clube",
+    subtitle = "Quantidade que cada clube realizou no campeonato"
+  ) +
+  theme_light() +
+    theme(legend.position = "left",
+          axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE, conflicts=FALSE}
+clube_vitorias <- sqldf("
+
+SELECT
+
+vencedor,
+count(*) num_vitoria
+      
+      
+      
+FROM campeonato_brasileiro_full
+
+group by  vencedor
+
+order by count(*) desc,vencedor
+")
+```
+
+
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE, conflicts=FALSE}
+
+clube_vitorias %>%
+ filter(vencedor != "-") %>%
+  ggplot() +
+    aes(x = reorder(vencedor, -num_vitoria), y = num_vitoria) +  # Ordena os clubes de acordo com os valores de gols
+    geom_col() +
+    geom_text(aes(label = num_vitoria), position = position_stack(vjust = 0.5), color = "black", size = 2, angle = 90, hjust = 0.5) +  # Adiciona os valores dos gols dentro de cada barra
+    scale_fill_hue(direction = 1) +
+    labs(
+      x = "Clubes",
+      y = "Número de Vitórias",
+      title = "Times com mais vitórias no campeonato",
+      subtitle = "Quantidade de vitórias de cada time no campeonato"
+    ) +
+    theme_light() +
+      theme(legend.position = "left",
+            axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+# Page 2
+
+## Row  
+```{r, echo=FALSE, warning=FALSE , message=FALSE, conflicts=FALSE}
+campeonato_brasileiro_full %>%
+ filter(!is.na(formacao_visitante)) %>%
+ ggplot() +
+  aes(x = formacao_mandante, y = mandante_Placar) +
+  geom_jitter(size = 1.5) +
+    labs(
+      x = "Formação",
+      y = "Qnt de gols na partida",
+      title = "Qnt de gols na partida como mandante por formação",
+      subtitle = "Qual formação obteve mais gols numa partida como mandante"
+    ) +
+    theme_light() +
+      theme(legend.position = "left",
+            axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+```{r, echo=FALSE, warning=FALSE}
+campeonato_brasileiro_full %>%
+ filter(!is.na(formacao_visitante)) %>%
+ ggplot() +
+  aes(x = formacao_visitante, y = visitante_Placar) +
+  geom_jitter(size = 1.5) +
+    labs(
+      x = "Formação",
+      y = "Qnt de gols na partida",
+      title = "Qnt de gols na partida como visitante por formação",
+      subtitle = "Qual formação obteve mais gols numa partida como visitante"
+    ) +
+    theme_light() +
+      theme(legend.position = "left",
+            axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+## Column 
+
+```{r, echo=FALSE, warning=FALSE , message=FALSE, conflicts=FALSE}
+ggplot(campeonato_brasileiro_estatisticas_full) +
+  aes(x = clube, weight = chutes_no_alvo) +
+  geom_bar(fill = "#4682B4") +
+  labs(
+    x = "Clube",
+    y = "Qnt de chute ao alvo",
+    title = "Clube com mais chutes no alvo",
+    subtitle = "Qual clube conseguiu acertar mais vezes o gol do adversário"
+  ) +
+    theme_light() +
+      theme(legend.position = "left",
+            axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
+
+```{r, echo=FALSE, warning=FALSE , message=FALSE, conflicts=FALSE}
+ggplot(campeonato_brasileiro_estatisticas_full) +
+  aes(x = clube, weight = escanteios) +
+  geom_bar(fill = "#4682B4") +
+  labs(
+    x = "Clube",
+    y = "Qnt de escanteios",
+    title = "Clube com mais escanteios",
+    subtitle = "Qual clube conseguiu ter mais escanteios no campeonato"
+  ) +
+    theme_light() +
+      theme(legend.position = "left",
+            axis.text.x = element_text(angle = 90, vjust = 0.5))
+```
