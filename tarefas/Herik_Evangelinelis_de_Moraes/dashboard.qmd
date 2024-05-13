@@ -1,0 +1,69 @@
+---
+title: "Dashboard - Ser mandante ou visitante implica no desempenho do time?"
+author: "Herik Evangelinelis"
+format: dashboard
+editor: visual
+---
+
+## Running Code
+
+# Frequência de gols por partida.
+
+Nestes dois histogramas, é possivel observar que existe uma maior probabilidade do mandante conseguir fazer 1 gol, porém para o visitante existe uma maior probabilidade de não fazer nenhum gol.
+
+Para 2 gols em diante, o visitante tambem tem um histórico de menor quantidade de gols.
+
+```{r}
+library(plotly)
+library(reticulate)
+library(transformr)
+library(gganimate)
+library(ggplot2)
+library(gridExtra)
+df <- read.csv('campeonato-brasileiro-full.csv')
+
+p1=ggplot(df, aes(x=mandante_Placar)) +
+  geom_histogram(stat='count') +
+  labs(x="Qtd de gols", y="Frequência", title="Frequência de gols por partida home") +
+  theme_minimal()
+
+p2=ggplot(df, aes(x=visitante_Placar)) +
+  geom_histogram(stat='count') +
+  labs(x="Qtd de gols", y="Frequência", title="Frequência de gols por partida mandante") +
+  theme_minimal()
+
+grid.arrange(p1, p2, ncol = 1)
+```
+
+# Vitória dos times Mandante e Visitante
+
+Como pode ser observado, todos os times estando em home venceram mais vezes do que estando away, mostrando que o local onde é realizada a partida influencia no desempenho do time
+
+```{r}
+
+df_home_wins <- df[df$mandante== df$vencedor,]
+
+home_wins_count <- as.data.frame(table(df_home_wins$mandante))
+
+colnames(home_wins_count) <- c("Time", "HomeWins")
+
+df_visit_wins <- df[df$visitante== df$vencedor,]
+
+visit_wins_count <- as.data.frame(table(df_visit_wins$visitante))
+
+colnames(visit_wins_count) <- c("Time", "VisitWins")
+
+df_wins <- merge(home_wins_count, visit_wins_count, by = "Time", all = TRUE)
+
+ggplot(df_wins, aes(x = Time, y = VisitWins)) +
+  geom_bar(aes(y = HomeWins), stat = "identity", fill = "blue") +
+  geom_bar(aes(y = VisitWins), stat = "identity", fill = "red", alpha = 0.5) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    labs(x = "Time", y = "Vitórias", title = "Vitórias em Casa e Fora por Time") +
+  scale_fill_manual(values = c("blue", "red"), guide = guide_legend(title = NULL)) +
+  guides(fill=guide_legend("Local da Vitória"))
+
+```
+
+``` r
+```
