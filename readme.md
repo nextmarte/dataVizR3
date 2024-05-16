@@ -6,3 +6,5 @@ Professores: Marcus Ramalho e Ariel Levy
 https://destroyededen.github.io/Quarto/Dashboard.html
 
 https://herikem.github.io/site_quarto_com_dashboard/
+
+https://gustavobgiusti.github.io/tarefa_mba/
