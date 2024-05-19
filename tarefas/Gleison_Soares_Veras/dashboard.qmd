@@ -167,7 +167,7 @@ campeonato_brasileiro_full %>%
     labs(
       x = "Formação",
       y = "Qnt de gols na partida",
-      title = "Qnt de gols na partida como mandante por formação",
+      title = "Qnt de gols na partida como mandante por  formação",
       subtitle = "Qual formação obteve mais gols numa partida como mandante"
     ) +
     theme_light() +
