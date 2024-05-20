@@ -8,3 +8,5 @@ https://destroyededen.github.io/Quarto/Dashboard.html
 https://herikem.github.io/site_quarto_com_dashboard/
 
 https://gustavobgiusti.github.io/tarefa_mba/
+
+https://gleisongsv.github.io/tarefa_2/dashboard.html
