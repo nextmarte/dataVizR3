@@ -1,0 +1,41 @@
+.navbar { 
+background-color: #1F3F78;
+color: #FFFFFF;
+position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+}
+
+.navbar-default .navbar-brand {color: #FFFFFF;
+  background-color: #1F3F78;
+}
+
+.navbar-default .navbar-brand {color: #FFFFFF;}
+.navbar-default .navbar-brand:hover {color: #FFFFFF;}
+.navbar { background-color: #1F3F78;}
+.navbar-default .navbar-nav > li > a {color:#FFFFFF;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .active > a:hover {color: #FFFFFF;background-color: #1a2744;}
+.navbar-default .navbar-nav > li > a:hover {color: #FFFFFF;background-color:#1a2744;text-decoration:underline;}
+
+.navbar-default .navbar-nav > li > a {
+  color:#FFFFFF;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>.active>a, .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover, .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus {
+    color: #ffffff;
+    background-color: #1a2744;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: #000000;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+    background-color: #1a2744;
+    color: #ffffff;
+}
