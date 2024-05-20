@@ -1,0 +1,23 @@
+<<<<<<< HEAD
+/* css styles */
+.navbar {
+  background-color: #17a2b8;
+  color: #fffc107;
+=======
+.reveal h2 {
+    text-align: center;
+}
+
+.footer {
+    font-size: 12px;
+    color: #fa0303;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+details>summary {
+    font-size: 40px;
+    color: #b84545;
+>>>>>>> a02865fe908bebddac5e2826e5be2a39ff62fc31
+}
