@@ -15,3 +15,5 @@ https://gleisongsv.github.io/tarefa_2/dashboard.html
 https://pmxs.github.io/ativ_mba/dash_cb.html
 
 https://victoriaevellyn.github.io/quarto_publicado_GCv/
+
+https://carllaamara.github.io/Dashboard_Carlla_Amara/
