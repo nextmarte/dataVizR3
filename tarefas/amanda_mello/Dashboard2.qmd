@@ -1,0 +1,279 @@
+---
+title: "Dashboard"
+format: 
+  dashboard:
+    nav-buttons: instagram
+    code-fold: true
+execute:
+  echo: false
+  include: true
+  message: false
+  warning: false
+editor: visual
+author: "Amanda's Analytics"
+---
+
+## Rows {.tabset}
+
+### Início
+ 
+  <div style="text-align: center; font-size: 18px; color: red; font-family: Arial, sans-serif;">
+  <p>Desempenho do Flamengo nos últimos seis campeonatos brasileiro<p>
+  <p> O Flamengo aumentou a quantidade de chutes a gol nos último seis anos?<p>
+  <p> O Flamengo melhorou a precisão de passe nos últimos seis anos? <p>
+  </div>
+![CAP](download.png){#fig-LABEL fig-alt="ALT"}
+
+```{r}
+#| echo: false
+library('tidyr')
+library('vctrs')
+library('dplyr')
+library('readr')
+library('lubridate')
+```
+
+```{r}
+#| echo: false
+dados_brasileiro_full <-read.csv("C:/Users/salut/Downloads/archive/campeonato-brasileiro-full.csv")
+```
+```{r}
+#| echo: false
+dados_brasileiro_full$data <- as.Date(dados_brasileiro_full$data, format="%d/%m/%Y")
+```
+
+```{r}
+#| echo: false
+dados_brasileiro_gols <-read.csv("C:/Users/salut/Downloads/archive/campeonato-brasileiro-gols.csv")
+
+```
+```{r}
+#| echo: false
+dados_brasileiro_cartoes <-read.csv("C:/Users/salut/Downloads/archive/campeonato-brasileiro-cartoes.csv")
+
+```
+```{r}
+#| echo: false
+dados_brasileiro_estatisticas_full <-read.csv("C:/Users/salut/Downloads/archive/campeonato-brasileiro-estatisticas-full.csv")
+
+```
+```{r}
+#| echo: false
+dados_brasileiro_full <- dados_brasileiro_full %>%
+  rename('partida_id' = 'ID')
+```
+
+```{r}
+#| echo: false
+dados_brasileiro_full <- dados_brasileiro_full %>%
+  select(
+    -hora,
+    -formacao_mandante,
+    -formacao_visitante,
+    -tecnico_mandante,
+    -tecnico_visitante,
+    -rodata,
+    -mandante_Placar,
+    -visitante_Placar,
+    -mandante_Estado,
+    -visitante_Estado,
+    -arena
+  )
+```
+
+```{r}
+#| echo: false
+dados_brasileiro_gols <- dados_brasileiro_gols %>%
+  select(
+    -rodata,
+    -atleta,
+  )
+```
+```{r}
+#| echo: false
+dados_brasileiro_gols <- dados_brasileiro_gols %>%
+  mutate(tipo_de_gol = ifelse(tipo_de_gol == "", "Gol Classico", tipo_de_gol))
+```
+
+```{r}
+#| echo: false
+dados_brasileiro_cartoes <- dados_brasileiro_cartoes %>%
+  select(
+    -rodata,
+    -atleta,
+  )
+
+```
+
+```{r}
+#| echo: false
+dados_brasileiro_estatisticas_full <- dados_brasileiro_estatisticas_full %>%
+  select(
+    -rodata,
+   )
+```
+
+```{r}
+#| echo: false
+#dados_brasileiro_estatisticas_full %>%
+  #summarise(
+    #Todos_Chutes_Zero = all(chutes == "0"),
+    #Todos_Chutes_No_Alvo_Zero = all(chutes_no_alvo == "0"),
+    #Todos_Posse_De_Bola_Zero = all(posse_de_bola == "0"),
+    #Todas_Faltas_Zero = all(faltas == "0")
+  #)
+```
+
+```{r}
+#| echo: false
+dados_brasileiro_cartoes_filtrado <- dados_brasileiro_cartoes %>%
+  filter(clube == "Flamengo")
+dados_brasileiro_estatisticas_full_filtrado <- dados_brasileiro_estatisticas_full %>%
+  filter(clube == "Flamengo")
+dados_brasileiro_full_filtrado <- dados_brasileiro_full %>%
+  filter(mandante == "Flamengo" | visitante == "Flamengo")
+dados_brasileiro_gols_filtrado <- dados_brasileiro_gols %>%
+  filter(clube == "Flamengo")
+```
+```{r}
+#| echo: false
+dados_brasileiro_full_filtrado_por_data <- dados_brasileiro_full_filtrado %>%
+  mutate(data = as.Date(data, format = "%Y-%m-%d")) %>%
+  filter(between(data, as.Date("2018-01-01"), as.Date("2023-12-31")))
+```
+```{r}
+#| echo: false
+# Filtrando a tabela de cartões
+dados_brasileiro_cartoes_filtrado <- semi_join(dados_brasileiro_cartoes, dados_brasileiro_full_filtrado_por_data, by = "partida_id")
+
+# Filtrando a tabela de estatísticas
+dados_brasileiro_estatisticas_full_filtrado <- semi_join(dados_brasileiro_estatisticas_full, dados_brasileiro_full_filtrado_por_data, by = "partida_id")
+
+# Filtrando a tabela de gols
+dados_brasileiro_gols_filtrado <- semi_join(dados_brasileiro_gols, dados_brasileiro_full_filtrado_por_data, by = "partida_id")
+
+```
+```{r}
+#| echo: false
+#o flamengo aumentou o nº de chutes_no_alvo nos últimos 6 anos?
+dados_brasileiro_estatisticas_flamengo <- dados_brasileiro_estatisticas_full_filtrado %>%
+  filter(clube == "Flamengo")
+```
+```{r}
+#| echo: false
+dados_estatisticas_flamengo_com_data <- left_join(dados_brasileiro_estatisticas_flamengo, 
+                                                  dados_brasileiro_full_filtrado_por_data %>% select(partida_id, data),
+                                                  by = "partida_id")
+
+```
+```{r}
+#| echo: false
+dados_estatisticas_flamengo_com_ano <- dados_estatisticas_flamengo_com_data %>%
+  mutate(ano = format(as.Date(data), "%Y"))
+```
+````{r}
+write.csv(dados_estatisticas_flamengo_com_ano, 'dados_estatisticas_flamengo_com_ano.csv', row.names = FALSE)
+View(dados_estatisticas_flamengo_com_ano)
+````
+```{r}
+#| echo: false
+jogos_por_ano_flamengo <- dados_estatisticas_flamengo_com_ano %>%
+  group_by(ano) %>%
+  summarise(jogos = n_distinct(partida_id))
+
+```
+```{r}
+#| echo: false
+dados_agregados <- dados_estatisticas_flamengo_com_ano %>%
+  filter(ano %in% 2017:2023) %>%
+  group_by(ano) %>%
+  summarise(
+    Total_Partidas = n_distinct(partida_id),
+    Total_Chutes_No_Alvo = sum(chutes_no_alvo, na.rm = TRUE),
+    Proporcao = Total_Chutes_No_Alvo / Total_Partidas
+  )
+```
+
+```{r}
+#| echo: false
+library(ggplot2)
+
+dados_agregados_long <- dados_agregados %>%
+  pivot_longer(cols = c("Total_Partidas", "Total_Chutes_No_Alvo"), 
+               names_to = "Categoria", 
+               values_to = "Total")
+```
+```{r}
+#| title: Chutes a gol
+dados_flamengo <- data.frame(
+  ano = c(2018, 2019, 2020, 2021, 2022, 2023),
+  Total_Partidas = c(38, 38, 26, 50, 38, 38),
+  Total_Chutes_No_Alvo = c(203, 218, 147, 295, 205, 180),
+  Proporcao = c(5.34, 5.74, 5.65, 5.9, 5.39, 4.74)
+)
+```
+
+### Chutes a gol
+
+```{r}
+#| title: Chutes ao alvo
+ggplot(data = dados_flamengo) +
+  geom_col(aes(x = ano, y = Total_Partidas), fill = "blue", alpha = 0.7) +
+  geom_col(aes(x = ano, y = Total_Chutes_No_Alvo), fill = "green", alpha = 0.7) +
+  geom_line(aes(x = ano, y = Proporcao * 10, group = 1), colour = "red", linewidth = 1) +
+  scale_y_continuous(name = "Total de Partidas / Total de Chutes no Alvo", 
+                     sec.axis = sec_axis(~./10, name = "Proporção")) +
+  labs(x = "Ano", title = "Proporção de chutes a gol por jogo",
+       subtitle = "",
+       caption = "Dados: Estatísticas do Flamengo") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+```{r}
+#| include: false 
+dados_estatisticas_flamengo_com_ano %>%
+  summarise(
+    Total_Vazios = sum(precisao_passes == "" | precisao_passes == " "),
+    Total_Inconsistente = sum(!grepl("^\\d+%$", precisao_passes))
+  )
+# Filtrando para manter apenas linhas com dados consistentes
+dados_estatisticas_flamengo_com_ano_limpo <- dados_estatisticas_flamengo_com_ano %>%
+  filter(grepl("^\\d+%$", precisao_passes))
+```
+```{r}
+#| echo: false
+dados_estatisticas_flamengo_com_ano <- dados_estatisticas_flamengo_com_ano %>%
+  mutate(
+    precisao_passe_numerico = as.numeric(sub("%", "", precisao_passes))  # Removendo o símbolo '%' e convertendo para numérico
+  ) %>%
+  group_by(ano) %>%
+  summarise(
+    media_precisao_passe = mean(precisao_passe_numerico, na.rm = TRUE)  # Calculando a média
+  )
+```
+
+### Precisão de passe
+
+```{r}
+#| title: Precisão de passe
+#| echo: false
+ggplot(dados_estatisticas_flamengo_com_ano, aes(x = ano, y = media_precisao_passe, group = 1, color = as.factor(ano))) +
+  geom_line(size = 1) +  # Adicionando uma linha para conectar os pontos
+  geom_point(size = 3, shape = 21, fill = "white") +  # Adicionando pontos com preenchimento branco
+  labs(title = "Média Anual da Precisão de Passe do Flamengo",
+       x = "Ano",
+       y = "Média da Precisão de Passe (%)",
+       color = "Ano") +  # Mudando 'fill' para 'color' para corresponder ao uso de linhas e pontos
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Ajustando a inclinação dos rótulos do eixo x para melhor leitura
+```
+
+### Conclusão
+
+#### Row
+
+No gráfico Chutes a Gol, a coluna verde escura representa o total de partidas, enquanto que a coluna verde clara representa o total de chutes a gol. O gráfico está organizado segundo uma distribuição anual de 2018 a 2023. É preciso destacar que em função da pandemia da COVID-19, alguns jogos que eram para ser disputados em 2020 foram transferidos para 2021. O total de chutes ao alvo pode estar relacionado por um lado a um maior número de partidas jogadas em 2021, por outro pode ter relação com o fato de que o flamengo foi o time com melhor ataque no campeonato brasileiro. A linha vermelha representa a proporção entre as duas variáveis analisadas, o que significa que há uma estabilidade de chutes a gol do Flamengo ao longo do tempo no Campeonato Brasileiro. 
+
+O gráfico precisão de passe expõe a média da precisão do passe do Flamengo ao longo dos últimos seis anos. Embora pareça haver uma variação grande da precisão do passe entre os anos 2019 e 2021, na verdade, ao considerarmos o eixo vertical (y), notamos que isso não se confirma. É preciso considerar que a média da precisão de passe inicia em 83,5%, tendo seu máximo próximo de 86%. Considerando esses aspectos, vemos que há uma variação de apenas 3%, o que não parece ser muito significativo, nos levando a concluir que assim como acontece com o desempenho de chutes a gol, a precisão de passe do Flamengo manteve-se estável nesses anos. 
+
