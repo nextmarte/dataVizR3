@@ -1,0 +1,44 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+# Estudante: Henrique Schlickmann
+
+# Carregando o pacote ggplot2 (se ainda não estiver instalado)
+install.packages("ggplot2")
+library(ggplot2)
+
+# Carregando o conjunto de dados mtcars
+data(mtcars)
+
+# Gráfico de barras (relação entre mpg e wt)
+ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(x = "Milhas por galão (mpg)", y = "Peso do carro (wt)",
+       title = "Gráfico de Barras: Relação entre mpg e wt")
+       
+### Esse conjunto de dados não é tão legal para gráficos de barra, ele mais interessante para dispersão, mas, como exemplo, nesse gráfico pdemos notar que carros mais leves gastão menos. 
+
+# Histograma (distribuição de mpg)
+ggplot(mtcars, aes(x = mpg)) +
+  geom_histogram(binwidth = 2, fill = "salmon") +
+  labs(x = "Milhas por galão (mpg)", y = "Contagem",
+       title = "Histograma: Distribuição de mpg")
+
+### Considerando que cada linha é um carro, podemos notar que a maioria dos carros faz entre 12 e 22 milhas por galão.
+
+# Boxplot (relação entre mpg e cyl)
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot(fill = "lightgreen") +
+  labs(x = "Número de cilindros (cyl)", y = "Milhas por galão (mpg)",
+       title = "Boxplot: Relação entre mpg e cyl")
+       
+### Aqui podemos notar que carros com mais cilindros tem uma variação menor em consumo de combustível. 
+
+# Gráfico de dispersão (relação entre mpg e hp)
+ggplot(mtcars, aes(x = hp, y = mpg)) +
+  geom_point(color = "purple") +
+  labs(x = "Cavalos de potência (hp)", y = "Milhas por galão (mpg)",
+       title = "Gráfico de Dispersão: Relação entre mpg e hp")
+       
+### Aqui podemos notar a correlação inversa entre potência e consumo.  
