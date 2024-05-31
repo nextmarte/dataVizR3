@@ -1,0 +1,26 @@
+---
+title: "Dashboard - Ciência de dados"
+author: "fulano, beltrano"
+format: dashboard
+editor: visual
+execute: 
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(esquisse)
+library(readr)
+
+```
+
+```{r}
+
+campeonato_brasileiro_gols <- read_csv("campeonato-brasileiro-gols.csv")
+
+
+```
+
+
+

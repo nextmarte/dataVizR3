@@ -1,0 +1,18 @@
+"0","#! title:Gols por Clube"
+"0","library(tidyverse)"
+"0","gols <- read_csv(""campeonato-brasileiro-gols.csv"")"
+"2","[1mRows: [22m[34m8932[39m [1mColumns: [22m[34m6[39m"
+"2","[36m──[39m [1mColumn specification[22m [36m───────────────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m (4): clube, atleta, minuto, tipo_de_gol
+[32mdbl[39m (2): partida_id, rodata"
+"2","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message."
+"0","gols %>%"
+"0","  group_by(clube) %>%"
+"0","  summarise(Total_Gols = n()) %>%"
+"0","  ggplot(aes(x = reorder(clube, -Total_Gols), y = Total_Gols)) +"
+"0","  geom_col(fill = ""steelblue"") +"
+"0","  coord_flip() +"
+"0","  labs(title = ""Total de Gols por Clube"", x = ""clube"", y = ""gols"")"

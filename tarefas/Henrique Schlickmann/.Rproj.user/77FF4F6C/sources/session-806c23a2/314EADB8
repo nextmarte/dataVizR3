@@ -1,0 +1,32 @@
+{
+    "id": "314EADB8",
+    "path": "/cloud/project/dashboard_henrique.qmd",
+    "project_path": "dashboard_henrique.qmd",
+    "type": "quarto_markdown",
+    "hash": "2232470832",
+    "contents": "",
+    "dirty": false,
+    "created": 1714391946291.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "6,0",
+        "scrollLine": "0",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "2159:2361"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1714487435,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1714487435412,
+    "read_only": false,
+    "read_only_alternatives": []
+}
