@@ -19,3 +19,5 @@ https://victoriaevellyn.github.io/quarto_publicado_GCv/
 https://carllaamara.github.io/Dashboard_Carlla_Amara/
 
 https://jlouro27.github.io/tarefa_gc_e_visualizadores_JL/dash_cb.html
+
+https://hschlickmann.github.io/tarefa2_dataviz/
