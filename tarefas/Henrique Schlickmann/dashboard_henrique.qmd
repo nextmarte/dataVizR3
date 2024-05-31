@@ -1,0 +1,97 @@
+---
+title: "Dashboard do Campeonato Brasileiro"
+format: dashboard
+---
+
+# Page 1 Estudante Henrique Schlickmann
+
+## Column
+
+```{r gols-por-clube, echo=FALSE}
+#! title:Gols por Clube
+library(tidyverse)
+gols <- read_csv("campeonato-brasileiro-gols.csv")
+
+
+
+gols %>%
+  group_by(clube) %>%
+  summarise(Total_Gols = n()) %>%
+  ggplot(aes(x = reorder(clube, -Total_Gols), y = Total_Gols)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(title = "Total de Gols por Clube", x = "clube", y = "gols")
+```
+
+## Column
+
+```{r finalizacoes, echo=FALSE}
+#! title:Finalizações e Finalizações no Gol
+
+estatisticas_full <- read_csv("campeonato-brasileiro-estatisticas-full.csv")
+
+estatisticas_full %>%
+  group_by(clube) %>%
+  summarise(Total_Chutes = sum(chutes), Total_Chutes_Gol = sum(chutes_no_alvo)) %>%
+  ggplot(aes(x = Total_Chutes, y = Total_Chutes_Gol, label = clube)) +
+  geom_text(aes(color = clube), show.legend = FALSE) +
+  labs(title = "Finalizações x Finalizações no Gol", x = "Total de Chutes", y = "Chutes no Gol")
+```
+
+# Page 2
+
+## Row
+
+```{r cartoes-por-clube, echo=FALSE}
+#! title:Cartões por Clube
+
+dados_cartoes <- read_csv("campeonato-brasileiro-cartoes.csv")
+dados_cartoes %>%
+  group_by(clube, cartao) %>%
+  summarise(Total_Cartoes = n()) %>%
+  ggplot(aes(x = clube, y = Total_Cartoes, fill = cartao)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Total de Cartões por Clube", x = "clube", y = "Total de Cartões") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+```
+
+## Row
+
+```{r posse-e-precisao, echo=FALSE}
+#! title:Cartões vermelhos vs Gols por jogador
+library(tidyverse)
+
+# Carregar dados de gols e cartões
+dados_gols <- read_csv("campeonato-brasileiro-gols.csv")
+dados_cartoes <- read_csv("campeonato-brasileiro-cartoes.csv")
+
+# Filtrar apenas os cartões vermelhos
+cartoes_vermelhos_por_jogador <- dados_cartoes %>%
+  filter(cartao == "Vermelho") %>%
+  group_by(atleta) %>%
+  summarise(Total_Cartoes_Vermelhos = n())
+
+# Calcular total de gols por jogador
+gols_por_jogador <- dados_gols %>%
+  group_by(atleta) %>%
+  summarise(Total_Gols = n())
+
+# Juntar os dados de gols e cartões vermelhos
+dados_jogadores <- gols_por_jogador %>%
+  full_join(cartoes_vermelhos_por_jogador, by = "atleta") %>%
+  replace_na(list(Total_Cartoes_Vermelhos = 0))  # Substituir NA por 0 para cartões
+
+# Criar o plot
+dados_jogadores %>%
+  ggplot(aes(x = Total_Cartoes_Vermelhos, y = Total_Gols, label = atleta)) +
+  geom_point(aes(color = Total_Gols), size = 4) +
+  geom_text(check_overlap = TRUE, nudge_y = 0.5) +
+  scale_color_gradient(low = "blue", high = "red") +
+  labs(title = "Relação entre Cartões Vermelhos e Gols por Jogador",
+       x = "Total de Cartões Vermelhos",
+       y = "Total de Gols Marcados",
+       color = "Total de Gols") +
+  theme_minimal()
+
+```

@@ -1,0 +1,17 @@
+"0","#! title:Finalizações e Finalizações no Gol"
+"0",""
+"0","estatisticas_full <- read_csv(""campeonato-brasileiro-estatisticas-full.csv"")"
+"2","[1mRows: [22m[34m16810[39m [1mColumns: [22m[34m13[39m"
+"2","[36m──[39m [1mColumn specification[22m [36m───────────────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m  (3): clube, posse_de_bola, precisao_passes
+[32mdbl[39m (10): partida_id, rodata, chutes, chutes_no_alvo, p..."
+"2","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message."
+"0","estatisticas_full %>%"
+"0","  group_by(clube) %>%"
+"0","  summarise(Total_Chutes = sum(chutes), Total_Chutes_Gol = sum(chutes_no_alvo)) %>%"
+"0","  ggplot(aes(x = Total_Chutes, y = Total_Chutes_Gol, label = clube)) +"
+"0","  geom_text(aes(color = clube), show.legend = FALSE) +"
+"0","  labs(title = ""Finalizações x Finalizações no Gol"", x = ""Total de Chutes"", y = ""Chutes no Gol"")"
