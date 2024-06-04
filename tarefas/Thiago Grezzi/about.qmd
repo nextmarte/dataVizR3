@@ -1,0 +1,6 @@
+---
+title: "Sobre"
+
+---
+
+MBA em Ciência de Dados, exploramos como gráficos e visualizadores de dados podem otimizar o Gerenciamento de Conhecimento no futebol, focando no Brasileirão 2023. Analisando o desempenho das equipes, destacamos o papel fundamental dos gráficos em transformar números em insights claros e promover uma cultura de transparência e ética no esporte."
