@@ -21,3 +21,5 @@ https://carllaamara.github.io/Dashboard_Carlla_Amara/
 https://jlouro27.github.io/tarefa_gc_e_visualizadores_JL/dash_cb.html
 
 https://hschlickmann.github.io/tarefa2_dataviz/
+
+https://thiagogrezzi.github.io/Dashboard-Futebol/
