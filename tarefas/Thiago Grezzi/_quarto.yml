@@ -1,0 +1,23 @@
+
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Thiago Grezzi"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Início
+        icon: ball
+      - href: about.qmd
+        text: Sobre
+      - href: dashboard.qmd
+        text: Dashboard
+format:
+  html:
+    theme: Zephyr
+    toc: true
+css: styles.css
+
+

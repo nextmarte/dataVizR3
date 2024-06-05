@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Projeto de Dados do Futebol Brasileiro",
+    "section": "",
+    "text": "Resumo da Análise de Dados: Brasileirão 2023\nO Brasileirão 2023 foi uma temporada repleta de emoção e competição acirrada, com equipes lutando até o último minuto para alcançar seus objetivos. A análise dos dados dessa temporada revela tendências interessantes e insights valiosos sobre o desempenho das equipes e os padrões táticos predominantes.\nDesempenho das Equipes:\nDurante o Brasileirão 2023, várias equipes se destacaram tanto no ataque quanto na defesa. O estudo dos dados mostra que equipes como Flamengo, Palmeiras e São Paulo exibiram consistência ao longo da temporada, mantendo-se no topo da tabela por grande parte do campeonato. Enquanto isso, outras equipes como Athletico Paranaense e Internacional tiveram performances irregulares, oscilando entre vitórias e derrotas.\nPadrões Táticos:\nEm termos de tática e estratégia, os dados revelam uma variedade de abordagens adotadas pelas equipes. Formações como o 4-3-3 e o 4-2-3-1 foram amplamente utilizadas, com ênfase no jogo de posse e na pressão alta. No entanto, também houve equipes que optaram por táticas mais defensivas, como o 4-4-2, buscando segurança na retaguarda e contra-ataques rápidos.\nConclusão:\nEm resumo, a análise dos dados do Brasileirão 2023 oferece uma visão abrangente do que foi uma temporada emocionante e competitiva. Com insights sobre o desempenho das equipes e os padrões táticos, esses dados fornecem uma base sólida para avaliar e entender o que aconteceu ao longo do campeonato. Essas informações não apenas alimentam a discussão entre os fãs de futebol, mas também são essenciais para os treinadores e dirigentes na busca por melhorias e sucesso futuro."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Sobre",
+    "section": "",
+    "text": "MBA em Ciência de Dados, exploramos como gráficos e visualizadores de dados podem otimizar o Gerenciamento de Conhecimento no futebol, focando no Brasileirão 2023. Analisando o desempenho das equipes, destacamos o papel fundamental dos gráficos em transformar números em insights claros e promover uma cultura de transparência e ética no esporte.”"
+  },
+  {
+    "objectID": "dashboard.html#clubes-com-mais-chute-ao-alvo",
+    "href": "dashboard.html#clubes-com-mais-chute-ao-alvo",
+    "title": "Análise dados do campeonato brasileiro",
+    "section": "Clubes com mais Chute ao ALvo",
+    "text": "Clubes com mais Chute ao ALvo"
+  }
+]
