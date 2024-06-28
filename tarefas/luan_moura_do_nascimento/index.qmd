@@ -1,0 +1,44 @@
+---
+title: "Estatísticas por Equipe do Campeonato Brasileiro"
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+library(tidyverse)
+library(esquisse)
+library(readr)
+library(ggplot2)
+```
+
+## Gols por Equipe
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE, fig.height=6, fig.width=7}
+campeonato_brasileiro_gols <- read_csv("campeonato-brasileiro-gols.csv")
+
+ggplot(campeonato_brasileiro_gols) +
+ aes(x = clube) +
+ geom_bar(fill = "#248220") +
+ coord_flip() +
+ theme_minimal()
+```
+
+## Escanteios por Equipe
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE, fig.height=6, fig.width=7}
+campeonato_brasileiro_estatisticas <- read_csv("campeonato-brasileiro-estatisticas-full.csv")
+
+ggplot(campeonato_brasileiro_estatisticas) +
+ aes(x = clube, y = escanteios) +
+ geom_col(fill = "#6C2083") +
+ coord_flip() +
+ theme_minimal()
+```
+
+## Impedimentos por Equipe
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE, fig.height=6, fig.width=7}
+ggplot(campeonato_brasileiro_estatisticas) +
+ aes(x = clube, y = impedimentos) +
+ geom_col(fill = "#6C2083") +
+ coord_flip() +
+ theme_minimal()
+```

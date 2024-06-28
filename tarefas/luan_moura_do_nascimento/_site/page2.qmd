@@ -1,0 +1,32 @@
+---
+title: "Estatísticas por Equipe do Campeonato Brasileiro"
+---
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+library(tidyverse)
+library(esquisse)
+library(readr)
+library(ggplot2)
+```
+
+## asdasd
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+
+```
+
+## asdad
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+
+```
+
+## asd
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE}
+
+```
