@@ -1,0 +1,20 @@
+project:
+  type: website
+
+website:
+  title: "Estatísticas por Equipe do Campeonato Brasileiro"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "Página 1"
+      - href: page2.qmd
+        text: "Página 2"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+

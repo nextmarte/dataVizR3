@@ -1,0 +1,44 @@
+---
+title: "Estatísticas por Equipe do Campeonato Brasileiro"
+---
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE, fig.height=6, fig.width=7}
+library(tidyverse)
+library(esquisse)
+library(readr)
+library(ggplot2)
+```
+
+## Cartões Vermelhos por Equipe
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE, fig.height=6, fig.width=7}
+
+campeonato_brasileiro_estatisticas <- read_csv("campeonato-brasileiro-estatisticas-full.csv")
+
+ggplot(campeonato_brasileiro_estatisticas) +
+ aes(x = clube, y = cartao_vermelho) +
+ geom_col(fill = "#DF2121") +
+ coord_flip() +
+ theme_minimal()
+```
+
+## Cartões Amarelos por Equipe
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE, fig.height=6, fig.width=7}
+ggplot(campeonato_brasileiro_estatisticas) +
+ aes(x = clube, y = cartao_amarelo) +
+ geom_col(fill = "#E4D334") +
+ coord_flip() +
+ theme_minimal()
+```
+
+## Faltas por Equipe
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, conflicts=FALSE, fig.height=6, fig.width=6}
+ggplot(campeonato_brasileiro_estatisticas) +
+ aes(x = clube, y = faltas) +
+ geom_bar(stat = "summary", 
+ fun = "sum", fill = "#4B7ED9") +
+ coord_flip() +
+ theme_minimal()
+```
